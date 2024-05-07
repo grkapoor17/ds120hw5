@@ -1,3 +1,5 @@
+import math
+
 def gcd(a,b):
     if b == 0:
         return a
@@ -5,8 +7,6 @@ def gcd(a,b):
         bigger = max(a,b)
         smaller = min(a,b)
         return gcd(smaller, bigger % smaller)
-
-print(gcd(120,80))
 
 def remove_pairs(path_str):
     if len(path_str) <= 1:
@@ -28,9 +28,23 @@ def is_opposite(dir1, dir2):
         return True
     else:
         return False
-    
 
-print(remove_pairs("EEWN"))
-print(remove_pairs("SSNS"))
-print(remove_pairs("ESNW"))
-print(remove_pairs("WEWE"))
+def bisection_root(func, guess1, guess2):
+    if abs(func(guess1)) <= 0.001:
+        return guess1
+    if abs(func(guess2)) <= 0.001:
+        return guess2
+    if func(guess1) >= 0 and func(guess2) >= 0:
+        raise ValueError("Both y-values are the same sign")
+    if func(guess1) < 0 and func(guess2) < 0:
+        raise ValueError("Both y-values are the same sign")
+    
+    new_guess = (guess1 + guess2) / 2
+    new_y = func(new_guess)
+
+    if (new_y >= 0 and func(guess1) < 0) or (new_y < 0 and func(guess1) >= 0):
+        return bisection_root(func, guess1, new_guess)
+    elif (new_y >= 0 and func(guess2) < 0) or (new_y < 0 and func(guess2) >= 0):
+        return bisection_root(func, new_guess, guess2)
+    else:
+        raise ValueError("Both y-values are the same sign")
