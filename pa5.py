@@ -34,9 +34,9 @@ def is_opposite(dir1, dir2):
 
 
 def bisection_root(func, guess1, guess2):
-    if abs(func(guess1)) <= 0.001:
+    if abs(func(guess1)) <= 0.0000001:
         return guess1
-    if abs(func(guess2)) <= 0.001:
+    if abs(func(guess2)) <= 0.0000001:
         return guess2
     if func(guess1) >= 0 and func(guess2) >= 0:
         raise ValueError("Both y-values are the same sign")
@@ -53,5 +53,5 @@ def bisection_root(func, guess1, guess2):
     # else:
     #     raise ValueError("Both y-values are the same sign")
 
-# print(bisection_root(lambda x: 1.33 -x , 1, 3))
-# print(bisection_root(lambda x: x*x - 3, 1, 4))
+print(bisection_root(lambda x: 1.33 -x , 1, 3))
+print(bisection_root(lambda x: x*x - 3, 1, 4))
